@@ -9,6 +9,7 @@ class CMD(object):
         self.helpFlag = False
         self.versionFlag = False
         self.cpOption = ""
+        self.XjreOption = ""
         self.Class = ""
         self.args = []
 
@@ -25,6 +26,7 @@ def parseCMD():
     parser.add_argument('-version', default=False, help='print version and exit', action="store_true")
     parser.add_argument('-classpath', default="", help='classpath')
     parser.add_argument('-cp', default="", help='classpath')
+    parser.add_argument('-Xjre', default="", help='path to jre')
 
     # 解析参数 argv是未定义的不定参数
     args, argv = parser.parse_known_args(None, None)
