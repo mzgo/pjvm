@@ -1,11 +1,12 @@
+import os
 from abc import abstractmethod
 
 
 class Entry(object):
-    pathListSeparator = ""
+    os.sep
 
-    def __init__(self):
-        string = ""
+    def __init__(self,pathListSeparator):
+        self.pathListSeparator = ""
 
     @abstractmethod
     def readClass(self, className):
@@ -17,3 +18,5 @@ class Entry(object):
 
     def newEntry(self,path):
         pass
+
+print(os.sep)
