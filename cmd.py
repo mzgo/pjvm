@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 
 parser = argparse.ArgumentParser()
@@ -25,7 +26,6 @@ def parseCMD():
     parser.add_argument('-help', default=False, help='print help message', action="store_true")
     parser.add_argument('-version', default=False, help='print version and exit', action="store_true")
     parser.add_argument('-classpath', default="", help='classpath')
-    parser.add_argument('-cp', default="", help='classpath')
     parser.add_argument('-Xjre', default="", help='path to jre')
 
     # 解析参数 argv是未定义的不定参数
@@ -37,8 +37,7 @@ def parseCMD():
 
     cmd.helpFlag = args.help
     cmd.versionFlag = args.version
-    cmd.cpOption = (args.classpath if (args.cp == "") else args.cp)
-
+    cmd.cpOption = args.classpath
     return cmd
 
 

@@ -1,24 +1,26 @@
 import os
 import sys
 
-from classpath.entry import Entry
+from classpaths.entry import Entry
 
 
 class DirEntry(Entry):
+    absDir = "";
+
     def __init__(self, path):
         if (os.path.exists(path)):
             self.__absDir = os.path.abspath(path)
         else:
-            print("path is not exists")
+            print("DirEntry : path is not exists")
             exit()
 
     def readClass(self, className):
         fileName = os.path.join(self.__absDir, className)
         try:
-            with open('fileName', 'r') as file:
+            with open(fileName, 'r') as file:
                 return file.read()
         except FileNotFoundError:
-            print("className:" + className + " is not found")
+            print("DirEntry : FileNotFoundError -> " + fileName)
             return None
 
     def String(self):

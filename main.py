@@ -1,8 +1,16 @@
+from classpaths.classpath import Parse
+
 from cmd import parseCMD, printUsage
 
 
 def startJVM(cmd):
-    print("classpath:%s class:%s args:%s\n" % (cmd.cpOption, cmd.Class, cmd.args))
+    cp = Parse(cmd.XjreOption, cmd.cpOption)
+    print("classpath:%s class:%s args:%s\n" % (cp.String(), cmd.Class, cmd.args))
+    className = cmd.Class.replace(".", "/", -1)
+    classData = cp.ReadClass(className)
+    if (classData == None):
+        print("Could not find or load main class %s\n" % cmd.Class)
+    print("class data:%s\n" % classData)
 
 
 def main():

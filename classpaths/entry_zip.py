@@ -1,25 +1,27 @@
 import os
-import sys
 import zipfile
 
-from classpath.entry import Entry
+from classpaths.entry import Entry
 
 
 class ZipEntry(Entry):
+
     def __init__(self, path):
         if (os.path.exists(path)):
             self.__absPath = os.path.abspath(path)
+            print(self.__absPath)
         else:
-            print("path is not exists")
+            print("ZipEntry : path is not exists")
             exit()
 
     def readClass(self, className):
         if not (zipfile.is_zipfile(self.__absPath)):
-            print("file is not zipfile:" + self.__absPath)
+            print("ZipEntry : file is not zipfile:" + self.__absPath)
             return None
 
         try:
             azip = zipfile.ZipFile(self.__absPath)
+
             nameList = azip.namelist()
             try:
                 for i in nameList:
@@ -27,11 +29,11 @@ class ZipEntry(Entry):
                         with azip.open(i, 'r') as file:
                             return file.read()
             except FileNotFoundError:
-                print("cannot found className:" + className + " in zipfile " + self.__absPath)
-                return None
+                print("ZipEntry : cannot found className:" + className + " in zipfile " + self.__absPath)
+                exit()
         except FileNotFoundError:
-            print("className:" + className + " is not found")
-            return None
+            print("ZipEntry : className:" + className + " is not found")
+            exit()
 
     def String(self):
         return self.__absPath
