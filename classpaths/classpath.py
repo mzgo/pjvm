@@ -1,17 +1,18 @@
 import os
 
+from classpaths.entry import Entry, WildcardEntry
+
+
 class Classpath(object):
 
     def __init__(self):
-        from classpaths.entry import Entry
-        self.bootClasspath = Entry()
-        self.extClasspath = Entry()
-        self.userClasspath = Entry()
+        self.bootClasspath = None
+        self.extClasspath = None
+        self.userClasspath = None
 
     def parseBootAndExtClasspath(self, jreOption):
         jreDir = self.getJreDir(jreOption)
         jreLibPath = os.path.join(jreDir, "lib", "*")
-        from classpaths.entry_wildcard import WildcardEntry
         self.bootClasspath = WildcardEntry(jreLibPath)
         jreExtPath = os.path.join(jreDir, "lib", "ext", "*")
         self.extClasspath = WildcardEntry(jreExtPath)
@@ -29,8 +30,7 @@ class Classpath(object):
     def parseUserClasspath(self, cpOption):
         if (cpOption == "" or cpOption == None):
             cpOption = "."
-        from classpaths.entry import newEntry
-        self.userClasspath = newEntry(cpOption)
+        self.userClasspath = Entry.init(cpOption)
 
     def ReadClass(self, className):
         className = className + ".class"
