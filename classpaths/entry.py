@@ -37,7 +37,7 @@ class CompositeEntry(Entry):
             if (data != None):
                 return data
 
-        print("CompositeEntry : class not found:" + className)
+        print("错误 : CompositeEntry : 找不到目标类:" + className)
         exit()
 
     def String(self):
@@ -50,7 +50,7 @@ class DirEntry(Entry):
         if (os.path.exists(path)):
             self.__absDir = os.path.abspath(path)
         else:
-            print("DirEntry : path is not exists")
+            print("错误 : DirEntry : 搜索路径不存在！")
             exit()
 
     def readClass(self, className):
@@ -59,7 +59,7 @@ class DirEntry(Entry):
             with open(fileName, 'r') as file:
                 return file.read()
         except FileNotFoundError:
-            print("DirEntry : FileNotFoundError -> " + fileName)
+            print("错误 : DirEntry : 找不到目标文件 -> " + fileName)
             return None
 
     def String(self):
@@ -88,7 +88,7 @@ class WildcardEntry(Entry):
             if (data != None):
                 return data
 
-        print("WildcardEntry : class not found:" + className)
+        print("错误 : WildcardEntry : 找不到目标类:" + className)
         exit()
 
     def String(self):
@@ -99,18 +99,17 @@ class ZipEntry(Entry):
     def __init__(self, path):
         if (os.path.exists(path)):
             self.__absPath = os.path.abspath(path)
-            print(self.__absPath)
         else:
-            print("ZipEntry : path is not exists")
+            print("错误 : ZipEntry : 路径不存在！")
             exit()
 
     def readClass(self, className):
         if not (zipfile.is_zipfile(self.__absPath)):
-            print("ZipEntry : file is not zipfile:" + self.__absPath)
+            print("错误 : ZipEntry : 目标文件不是ZIP文件:" + self.__absPath)
             return None
 
         try:
-            azip = zipfile.ZipFile(self.__absPath)
+            azip = zipfile.ZipFile(self.__absPath,"r",zipfile.ZIP_DEFLATED)
 
             nameList = azip.namelist()
             try:
@@ -119,10 +118,10 @@ class ZipEntry(Entry):
                         with azip.open(i, 'r') as file:
                             return file.read()
             except FileNotFoundError:
-                print("ZipEntry : cannot found className:" + className + " in zipfile " + self.__absPath)
+                print("错误 : ZipEntry : 在ZIP文件 " + self.__absPath+ " 中找不到目标类: "+ className  )
                 exit()
         except FileNotFoundError:
-            print("ZipEntry : className:" + className + " is not found")
+            print("错误 : ZipEntry : 类名:" + className + " 不存在")
             exit()
 
     def String(self):

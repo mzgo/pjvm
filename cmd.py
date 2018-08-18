@@ -16,7 +16,7 @@ class CMD(object):
 
 
 def printUsage():
-    print("Usage: %s [-options] class [args...]\n" % sys.argv[0])
+    print("用法: %s [-options] class [args...]\n" % sys.argv[0])
 
 
 def parseCMD():
