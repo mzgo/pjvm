@@ -7,9 +7,7 @@ from classfile.member_info import readMembers
 def parse(classData):
     #try:
     cr = ClassReader(classData)
-    cf = ClassFile()
-    cf.read(cr)
-    return cf
+    return ClassFile().read(cr)
     #except:
     #    print("错误 : ClassFile.parse() : 解析class文件出错！")
 #    exit()
@@ -41,6 +39,7 @@ class ClassFile(object):
         self.fields = readMembers(reader, self.constantPool)
         self.methods = readMembers(reader, self.constantPool)
         self.attributes = readAttributes(reader, self.constantPool)
+        return self
 
     def ClassName(self):
         return self.constantPool.getClassName(self.thisClass)

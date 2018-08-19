@@ -39,5 +39,4 @@ def main():
     else:
         startJVM(cmd)
 
-
 main()

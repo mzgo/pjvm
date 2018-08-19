@@ -1,14 +1,4 @@
-from abc import abstractmethod
-
 from classfile.constant_info import *
-from classfile.cp_class import ConstantClassInfo
-from classfile.cp_member_ref import ConstantFieldrefInfo, ConstantMethodrefInfo, ConstantInterfaceMethodrefInfo, \
-    ConstantMemberrefInfo
-from classfile.cp_name_and_type import ConstantNameAndTypeInfo
-from classfile.cp_numeric import ConstantLongInfo, ConstantDoubleInfo, ConstantIntegerInfo, ConstantFloatInfo
-from classfile.cp_string import ConstantStringInfo
-from classfile.cp_utf8 import ConstantUtf8Info
-
 
 class ConstantPool(object):
 
@@ -89,12 +79,12 @@ def newConstantInfo(tag, cp):
         return ConstantInterfaceMethodrefInfo(ConstantMemberrefInfo(cp))
     elif tag == CONSTANT_NameAndType:
         return ConstantNameAndTypeInfo()
-    # elif tag == CONSTANT_MethodType:
-    #     return ConstantMethodTypeInfo()
-    # elif tag == CONSTANT_MethodHandle:
-    #     return ConstantMethodHandleInfo()
-    # elif tag == CONSTANT_InvokeDynamic :
-    #     return ConstantInvokeDynaminInfo()
+    elif tag == CONSTANT_MethodType:
+        return ConstantMethodTypeInfo()
+    elif tag == CONSTANT_MethodHandle:
+        return ConstantMethodHandleInfo()
+    elif tag == CONSTANT_InvokeDynamic :
+        return ConstantInvokeDynamicInfo()
     else:
         print("错误 : java.lang.ClassFormatError: constant pool tag!")
         exit()
