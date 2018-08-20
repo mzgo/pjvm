@@ -7,5 +7,7 @@ class Frame(object):
     def __init__(self,maxLocals,maxStack):
         self.localVars = LocalVars(maxLocals) # LocalVars
         self.operandStack = OperandStack(maxStack) # * OperandStack
+        self.thread = []
+        self.nextPC = None
 
 

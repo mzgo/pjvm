@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 
 def readAttributes(reader,cp):
     attributesCount = reader.readUint16()
@@ -44,6 +44,7 @@ attribute_info {
 }
 """
 class AttributeInfo(object):
+    __metaclass__ = ABCMeta
     @abstractmethod
     def readInfo(self,reader,cp):
         pass

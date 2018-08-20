@@ -29,14 +29,6 @@ class ConstantPool(object):
         utf8Info = self.getConstantInfo(index)
         return utf8Info.str
 
-
-class ConstantInfo(object):
-
-    @abstractmethod
-    def readInfo(self, reader):
-        pass
-
-
 def readConstantPool(reader):
     cpCount = reader.readUint16()
     cp = [0 for i in range(cpCount)]

@@ -1,7 +1,7 @@
 #定义常量池中各种数据结构
 
 import struct
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 
 #常量类型 tag
 CONSTANT_Class = 7
@@ -21,6 +21,7 @@ CONSTANT_InvokeDynamic = 18
 
 #常量池数据对象接口
 class ConstantInfo(object):
+    __metaclass__ = ABCMeta
     @abstractmethod
     def readInfo(self):
         pass
