@@ -2,33 +2,27 @@ class Stack(object):
 
     def __init__(self, maxSize):
         self.maxSize = maxSize  # uint
-        self.SIZE = None  # uint
-        self._top = None  # * Frame
+        self.size = 0  # uint
+        self.data = []  # []Frame
 
     def push(self, frame):
-        if self.SIZE >= self.maxSize:
+        if self.size +1  >= self.maxSize:
             print("错误 : jvm_stack : java.lang.StackOverflowError")
             exit()
 
-        if self._top != None:
-            frame.lower = self._top
-
-        self._top = frame
-        self.SIZE += 1
+        self.data.append(frame)
+        self.size = len(self.data)
 
     def pop(self):
-        if self._top == None :
+        if self.size == 0 :
             print("错误 : jvm_stack : 栈空！")
             exit()
 
-        top = self._top
-        self._top = top.lower
-        top.lower = None
-        self.SIZE -= 1
-        return top
+        self.size -= 1
+        return self.data.pop()
 
     def top(self):
-        if self._top == None:
+        if self.size == 0 :
             print("错误 : jvm_stack : 栈空！")
             exit()
-        return self._top
+        return self.data[-1]

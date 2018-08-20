@@ -1,8 +1,11 @@
+from rtda.jvm_stack import Stack
+
+
 class Thread(object):
 
     def __init__(self):
         self.pc = None #int
-        self.stack = newStack(1024) # *Stack
+        self.stack = Stack(1024) # *Stack
 
     def PushFrame(self,frame):
         self.stack.push(frame)
